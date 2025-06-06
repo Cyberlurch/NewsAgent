@@ -1,0 +1,11 @@
+next steps for the Project NewsAgent:
+
+- migration tutorial to a raspberry pi 4
+- run at night for daily newsletter in the morning
+- add websites
+- maybe add RSS feeds
+- maybe add Telegram channels
+- maybe add X accounts for scraping
+- output maybe into Telegram channel in addition to email
+
+

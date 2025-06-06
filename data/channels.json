@@ -1,0 +1,29 @@
+{
+  "max_videos": 1,
+
+  "preparedness": [
+    { "name": "Canadian Prepper",     "handle": "CanadianPrepper"   },
+    { "name": "Prepper News Flash",   "handle": "PrepperNewsFlash"  },
+    { "name": "The Poplar Report",    "handle": "ThePoplarReport"   },
+    { "name": "Neil McCoy Ward",      "handle": "NeilMcCoyWard"     }
+  ],
+
+  "crypto": [
+    { "name": "Blocktrainer",         "handle": "Blocktrainer"      }
+  ],
+
+  "christianity": [
+    { "name": "Behold Israel",        "handle": "beholdisrael"      },
+    { "name": "CBN News",             "handle": "CBNnewsonline"     }
+  ],
+
+  "intl_news": [
+    { "name": "WELT",                 "handle": "WELTVideoTV"       },
+    { "name": "Redacted",             "handle": "RedactedNews"      },
+    { "name": "Judging Freedom",      "handle": "judgingfreedom"    }
+  ],
+
+  "sweden": [
+    { "name": "Riks",                 "handle": "Riks"              }
+  ]
+}

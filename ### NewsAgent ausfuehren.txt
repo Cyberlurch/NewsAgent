@@ -1,0 +1,45 @@
+Activate virtual environment:
+
+cd "D:\Dropbox\Eigene Dateien\AI\NewsAgent_V2"
+
+& C:\Users\lurch\AppData\Local\pypoetry\Cache\virtualenvs\newsagent-kXX81KeG-py3.12\Scripts\Activate.ps1
+
+
+
+Run NewsAgent:
+
+
+python -m src.newsagent.main
+
+fast runs:	
+python -m src.newsagent.main `
+  --channels data/channels_debug.json `
+  --threads 1 `
+  --max-chunks 6
+
+
+
+realistic daily run (free tier)	
+python -m src.newsagent.main `
+  --channels data/channels.json `
+  --threads 1 `
+  --max-chunks 12
+
+
+
+full run:
+python -m src.newsagent.main `
+  --channels data/channels.json `
+  --threads 1
+
+
+
+
+Aktive Sprachen auswählen nach Bedarf, aktuell ENG und DEU aktiviert in main.py:
+ACTIVE_LANGS = ("ENG", "DEU", "SVE", "POL")
+
+
+to run the CLEANER script in Powershell:
+
+.\clean-newsagent.ps1
+

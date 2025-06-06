@@ -1,0 +1,27 @@
+[tool.poetry]
+name = "newsagent"
+version = "0.1.0"
+description = "Modular AI‑powered news aggregator and summarizer"
+authors = ["Your Name <you@example.com>"]
+packages = [{include = "newsagent", from = "src"}]
+
+[tool.poetry.dependencies]
+python = ">=3.12,<3.13"
+requests = "^2.31.0"
+beautifulsoup4 = "^4.12"
+feedparser = "^6.0"
+newspaper3k = "^0.2.8"
+youtube-transcript-api = "^0.6.2"
+telethon = "^1.34.0"
+langchain = "^0.1.18"
+openai = "*"      # or groq-sdk when available
+python-dotenv = "^1.0"
+sqlmodel = "^0.0.14"
+groq = "^0.25.0"
+markdown = "^3.8"
+datasketch = "^1.6.5"
+tiktoken = "^0.9.0"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.0"
+rich = "^13.7"

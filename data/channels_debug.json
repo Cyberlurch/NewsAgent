@@ -1,0 +1,10 @@
+{
+  "max_videos": 1,
+
+  "preparedness": [
+    { "name": "Canadian Prepper",     "handle": "CanadianPrepper"   },
+    { "name": "Prepper News Flash",   "handle": "PrepperNewsFlash"  },
+    { "name": "The Poplar Report",    "handle": "ThePoplarReport"   },
+    { "name": "Neil McCoy Ward",      "handle": "NeilMcCoyWard"     }
+  ]
+}

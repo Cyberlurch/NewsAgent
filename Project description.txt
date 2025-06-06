@@ -1,0 +1,28 @@
+This Project is about a NewsAgent that collects information from different sources, like YouTube and later on even other sources, like Telegram channels, websites and RSS feeds and X/Twitter.
+The agent scrapes the sources and transcribes the content Before summarizing them.
+the aim is even to translate the content from the original English to german and later on even Swedish and polish.
+Then, the agent mails out the finished newsletter to the recipients.
+the summaries have to be meaningful but at the same time not too lengthy. a range, depending on the content between 250-700 Words for each summary should be a good flexible aim, menaning that the whole newsletter will contain a number of these summaries.
+the Project is for fun, private and no-cost. that means only free solutions for API-keys and the like.
+the coding is done in Python 3.12 for compatibility reasons of certain modules. the work is done on a windows machine, but the end-goal is to install a final working version on a raspberry pi and let it run during nighttime on a Daily basis to email out the reports being available in the morning.
+the root directory is Always D:\Dropbox\Eigene Dateien\AI\NewsAgent_V2
+the main variables are kept in the .env file.a venv is created and windows powershell 7 is used for commands.
+the tree structure is seen in the tree.txt file. 
+the agent is modular with 
+
+D:\Dropbox\Eigene Dateien\AI\NewsAgent_V2\src\newsagent\main.py as main script.
+collectors in D:\Dropbox\Eigene Dateien\AI\NewsAgent_V2\src\newsagent\collectors:
+youtube_collector.py
+utilities in D:\Dropbox\Eigene Dateien\AI\NewsAgent_V2\src\newsagent\utils, like:
+email_sender, groq_summarizer, report_writer, translator
+reports should land here:
+D:\Dropbox\Eigene Dateien\AI\NewsAgent_V2\reports
+the scraped data is cached here: D:\Dropbox\Eigene Dateien\AI\NewsAgent_V2\src\cache or here D:\Dropbox\Eigene Dateien\AI\NewsAgent_V2\.cache
+data like channels.json is located here: D:\Dropbox\Eigene Dateien\AI\NewsAgent_V2\data
+
+the goal is to optimize the Project by making it stable and the output meaningful. 
+if these goals are met, more functionality can be added.
+
+when doing troubleshooting or iterations, ask for what information you need from me to continue efficiently.
+when responding, do it Always with complete drop-in ready scripts, not snippets to avoid errors.
+do not change structure, variables or folder or file locations. If necessary to do that, discuss these planned Changes in advanve to ensure stability during troubleshooting.
