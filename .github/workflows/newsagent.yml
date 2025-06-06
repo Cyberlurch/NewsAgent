@@ -1,47 +1,69 @@
 name: NewsAgent nightly run
 
+# ── when to start ─────────────────────────────────────────────
 on:
-  # every night at 05:00 UTC  (≈ 07:00 local Germany)
+  # every day at 01:00 UTC  → adjust if you like
   schedule:
-    - cron: '0 5 * * *'
-  # manual “Run workflow” button
+    - cron: '0 1 * * *'
+  # manual trigger button
   workflow_dispatch:
 
+# ── what to do ────────────────────────────────────────────────
 jobs:
   build-and-run:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04     # latest LTS runner
+
+    # All secrets are injected as environment variables so
+    # NewsAgent can read them via os.getenv()
+    env:
+      GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
+      SMTP_HOST:    ${{ secrets.SMTP_HOST }}
+      SMTP_PORT:    ${{ secrets.SMTP_PORT }}
+      SMTP_USER:    ${{ secrets.SMTP_USER }}
+      SMTP_PASS:    ${{ secrets.SMTP_PASS }}
+      RECIP_EN:     ${{ secrets.RECIP_EN }}
+      RECIP_DE:     ${{ secrets.RECIP_DE }}
+      RECIP_SV:     ${{ secrets.RECIP_SV }}
+      RECIP_PL:     ${{ secrets.RECIP_PL }}
+      SEND_EMAIL:   "1"                       # turn mailing on
 
     steps:
-    # 1️⃣  checkout the code
-    - uses: actions/checkout@v4
+      # 1️⃣  Check out your repository
+      - uses: actions/checkout@v4
 
-    # 2️⃣  set-up Python
-    - uses: actions/setup-python@v5
-      with:
-        python-version: '3.12'
+      # 2️⃣  Set up Python 3.12
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
 
-    # 3️⃣  install Poetry + deps
-    - name: Install dependencies (Poetry)
-      run: |
-        python -m pip install --upgrade pip
-        pip install poetry
-        poetry install --no-interaction --no-root
+      # 3️⃣  OS libraries yt-dlp may need
+      - name: Install system packages
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
 
-    # 4️⃣  run the NewsAgent
-    - name: Run NewsAgent
-      env:
-        GROQ_API_KEY: ${{ secrets.GROQ_API_KEY }}
-        SMTP_HOST:   ${{ secrets.SMTP_HOST }}
-        SMTP_PORT:   ${{ secrets.SMTP_PORT }}
-        SMTP_USER:   ${{ secrets.SMTP_USER }}
-        SMTP_PASS:   ${{ secrets.SMTP_PASS }}
-        RECIP_EN:    ${{ secrets.RECIP_EN }}
-        RECIP_DE:    ${{ secrets.RECIP_DE }}
-        RECIP_SV:    ${{ secrets.RECIP_SV }}
-        RECIP_PL:    ${{ secrets.RECIP_PL }}
-        SEND_EMAIL:  1           # or 0 to disable mailing
-      run: |
-        poetry run python -m src.newsagent.main \
-          --channels data/channels.json \
-          --threads 1 \
-          --max-chunks 12
+      # 4️⃣  Install Poetry & project dependencies
+      - name: Install dependencies (Poetry)
+        run: |
+          python -m pip install --upgrade pip
+          pip install poetry
+          poetry install --no-interaction --no-root
+
+      # 5️⃣  Run NewsAgent
+      - name: Run NewsAgent
+        run: |
+          poetry run python -m src.newsagent.main \
+            --channels data/channels.json \
+            --threads 1 \
+            --max-chunks 12
+
+      # 6️⃣  Keep the generated reports as build artifacts
+      - name: Upload reports
+        if: always()                # even on failure
+        uses: actions/upload-artifact@v4
+        with:
+          name: newsagent-reports
+          path: |
+            src/reports/*.md
+            reports/*.md
+          if-no-files-found: ignore
